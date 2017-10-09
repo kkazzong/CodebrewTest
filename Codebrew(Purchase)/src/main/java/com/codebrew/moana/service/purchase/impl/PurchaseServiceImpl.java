@@ -69,4 +69,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Purchase purchase = purchaseDAO.getPurchase(purchaseNo);
 		purchaseDAO.cancelPayment(purchase);
 	}
+
+	//getter, setter
+	public void setPurchaseDAO(PurchaseDAO purchaseDAO) {
+		this.purchaseDAO = purchaseDAO;
+	}
+	
 }

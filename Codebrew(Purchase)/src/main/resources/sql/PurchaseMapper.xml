@@ -82,6 +82,7 @@
 		f.festival_name AS festival_name,
 		p.party_no AS party_no,
 		p.party_name AS party_name,
+		p.party_image AS party_image,
 		pc.tid AS tid,
 		pc.purchase_method_type AS purchase_method_type,
 		pc.item_name AS item_name,
