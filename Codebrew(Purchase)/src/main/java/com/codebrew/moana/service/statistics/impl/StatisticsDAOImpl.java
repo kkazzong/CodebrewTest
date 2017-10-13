@@ -25,5 +25,14 @@ public class StatisticsDAOImpl implements StatisticsDAO{
 	public List<Statistics> getDailyTotalSaleAmountStat() {
 		return sqlSession.selectList("StatisticsMapper.getDailyTotalSaleAmountStat");
 	}
-
+	
+	@Override
+	public List<Statistics> getMonthlyTotalSaleAmountStat() {
+		return sqlSession.selectList("StatisticsMapper.getMonthlyTotalSaleAmountStat");
+	}
+	
+	@Override
+	public List<Statistics> getQuarterTotalSaleAmountStat() {
+		return sqlSession.selectList("StatisticsMapper.getQuarterTotalSaleAmountStat");
+	}
 }

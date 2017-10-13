@@ -29,9 +29,35 @@
 		SUM(purchase_count) AS total_count
 		FROM purchase
 		WHERE tran_code IS NULL
-		AND purchase_date >= TO_CHAR(SYSDATE - 7, 'yyyy-mm-dd')
+		AND purchase_date >= TO_DATE(SYSDATE - 7)
 		GROUP BY purchase_date
 		ORDER BY purchase_date
+	</select>
+	
+	<select id="getMonthlyTotalSaleAmountStat" resultMap="selectStatisticsMap">
+		SELECT
+		vt.purchase_date AS stat_date,
+		vt.purchase_price AS total_price,
+		vt.purchase_count AS total_count
+		FROM (
+					SELECT
+					EXTRACT(MONTH FROM purchase_date) AS purchase_date,
+					SUM(purchase_price) AS purchase_price,
+					SUM(purchase_count) AS purchase_count
+					FROM purchase
+					GROUP BY EXTRACT(MONTH FROM purchase_date)
+					ORDER BY purchase_date
+					) vt
+	</select>
+	
+	<select id="getQuarterTotalSaleAmountStat" resultMap="selectStatisticsMap">
+		SELECT
+		TO_CHAR(purchase_date, 'q') AS stat_date,
+		SUM(purchase_price) AS total_price,
+		SUM(purchase_count) AS total_count
+		FROM purchase
+		GROUP BY TO_CHAR(purchase_date, 'q')
+		ORDER BY stat_date
 	</select>
 	
 </mapper>

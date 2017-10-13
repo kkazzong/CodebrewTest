@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.imageio.ImageIO;
 
@@ -138,8 +139,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 
 			JSONObject jsonObject = (JSONObject) JSONValue.parse(br);
 			System.out.println("mapping한 제이슨  : " + jsonObject);
-
+			
 			purchase.setTid(jsonObject.get("tid").toString());
+			purchase.setPaymentNo(jsonObject.get("tid").toString());
 			purchase.setNextRedirectPcUrl(jsonObject.get("next_redirect_pc_url").toString());
 			this.setPurchase(purchase);
 
@@ -200,6 +202,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			System.out.println("mapping한 제이슨  : " + jsonObject);
 
 			purchase.setAid(jsonObject.get("aid").toString());
+			purchase.setPaymentNo(jsonObject.get("tid").toString());
 			purchase.setTid(jsonObject.get("tid").toString());
 			purchase.setCid(jsonObject.get("cid").toString());
 			purchase.setPartnetOrderId(jsonObject.get("partner_order_id").toString());
@@ -211,12 +214,26 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			Map amount = new HashMap();
 			amount = (Map) jsonObject.get("amount");
 			purchase.setPurchasePrice(new Integer(amount.get("total").toString()));
+			
+			long unixSeconds = 1372339860;
+			Date date = new Date(unixSeconds*1000L);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			// GMT(그리니치 표준시 +9 시가 한국의 표준시
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT+9"));
+			String formattedDate = sdf.format(date);
+			date = sdf.parse(jsonObject.get("approved_at").toString());
+			System.out.println(formattedDate);
+			System.out.println(date.toString());
 
 			SimpleDateFormat origin = new SimpleDateFormat(ISO_8601_24H_FULL_FORMAT);
-			Date date = origin.parse(jsonObject.get("approved_at").toString());
+			//SimpleDateFormat origin = new SimpleDateFormat("yyyy-MM-dd");
+			//SimpleDateFormat origin2 = new SimpleDateFormat("HH:mm:ss");
+			//Date date = origin.parse(jsonObject.get("approved_at").toString());
+			//Date date2 = origin2.parse(jsonObject.get("approved_at").toString());
 			purchase.setPurchaseDate(date);
-			System.out.println(origin);
+			//purchase.setPurchaseDate(jsonObject.get("approved_at").toString());
 			System.out.println(date.toString());
+			//System.out.println(date2.getTime());
 
 			purchase.setQrCode(this.createQRCode());
 
@@ -290,7 +307,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				purchase.setTranCode("2"); //2인경우 결제취소
 			}
 			purchase.setAid(jsonObject.get("aid").toString());
-			purchase.setTid(jsonObject.get("tid").toString());
+			purchase.setPaymentNo(jsonObject.get("tid").toString());
 			purchase.setCid(jsonObject.get("cid").toString());
 			purchase.setPartnetOrderId(jsonObject.get("partner_order_id").toString());
 			purchase.setPartnerUserId(jsonObject.get("partner_user_id").toString());
@@ -305,6 +322,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			SimpleDateFormat origin = new SimpleDateFormat(ISO_8601_24H_FULL_FORMAT);
 			Date date = origin.parse(jsonObject.get("canceled_at").toString()); //결제취소시각
 			purchase.setPurchaseDate(date); 
+			//purchase.setPurchaseDate(jsonObject.get("canceled_at").toString());
 			System.out.println(origin);
 			System.out.println(date.toString());
 

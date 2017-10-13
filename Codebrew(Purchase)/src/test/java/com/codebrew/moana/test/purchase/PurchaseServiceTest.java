@@ -71,7 +71,7 @@ public class PurchaseServiceTest {
 		// purchase.setItemName(party.getPartyName());
 		SimpleDateFormat origin = new SimpleDateFormat("yyyy-mm-dd");
 		Date date = origin.parse("2017-11-18");
-		purchase.setPurchaseDate(date);
+		//purchase.setPurchaseDate(date);
 		purchase.setPurchaseCount(3);
 		purchase.setPurchasePrice(30000);
 		purchase.setTranCode("1");

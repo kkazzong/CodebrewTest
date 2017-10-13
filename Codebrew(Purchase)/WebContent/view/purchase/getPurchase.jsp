@@ -134,7 +134,7 @@
 							<br>
 							<div class="row">
 								<div class="col-xs-4 col-md-6"><strong>결제번호</strong></div>
-								<div class="col-xs-8 col-md-6">${purchase.tid}</div>
+								<div class="col-xs-8 col-md-6">${purchase.paymentNo}</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-4 col-md-6"><strong>결제일시</strong></div>
@@ -194,7 +194,7 @@
 	</c:if>
 	<hr>
 	<hr>
-	결제번호 : ${purchase.tid}
+	결제번호 : ${purchase.paymentNo}
 	<hr>
 	결제일시 : ${purchase.purchaseDate}
 	<hr>

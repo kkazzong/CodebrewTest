@@ -4,12 +4,14 @@ import java.util.Date;
 
 public class Purchase {
 	
+	
 	//Field
 	private User user;
 	private Ticket ticket;
 	private QRCode qrCode;
 	private int purchaseNo;
 	private String tid; //결제번호
+	private String paymentNo; //결제번호
 	private String nextRedirectPcUrl; //결제준비API
 	private String aid; //Request번호
 	private String cid; //가맹점번호
@@ -165,14 +167,22 @@ public class Purchase {
 		this.purchaseNo = purchaseNo;
 	}
 
+	public String getPaymentNo() {
+		return paymentNo;
+	}
+
+	public void setPaymentNo(String paymentNo) {
+		this.paymentNo = paymentNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [user=" + user + ", ticket=" + ticket + ", qrCode=" + qrCode + ", purchaseNo=" + purchaseNo
-				+ ", tid=" + tid + ", nextRedirectPcUrl=" + nextRedirectPcUrl + ", aid=" + aid + ", cid=" + cid
-				+ ", partnetOrderId=" + partnetOrderId + ", partnerUserId=" + partnerUserId + ", purchaseMethodType="
-				+ purchaseMethodType + ", itemName=" + itemName + ", purchaseDate=" + purchaseDate + ", purchasePrice="
-				+ purchasePrice + ", purchaseCount=" + purchaseCount + ", tranCode=" + tranCode + ", purchaseFlag="
-				+ purchaseFlag + "]";
+				+ ", tid=" + tid + ", paymentNo=" + paymentNo + ", nextRedirectPcUrl=" + nextRedirectPcUrl + ", aid="
+				+ aid + ", cid=" + cid + ", partnetOrderId=" + partnetOrderId + ", partnerUserId=" + partnerUserId
+				+ ", purchaseMethodType=" + purchaseMethodType + ", itemName=" + itemName + ", purchaseDate="
+				+ purchaseDate + ", purchasePrice=" + purchasePrice + ", purchaseCount=" + purchaseCount + ", tranCode="
+				+ tranCode + ", purchaseFlag=" + purchaseFlag + "]";
 	}
 
 }

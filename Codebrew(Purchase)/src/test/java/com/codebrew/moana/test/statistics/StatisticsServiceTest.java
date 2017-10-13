@@ -41,11 +41,30 @@ public class StatisticsServiceTest {
 	@Qualifier("statisticsDAOImpl")
 	StatisticsDAO statisticsDAO;
 
-	@Test
-	public void getDailyTotalAmount() {
+	//@Test
+	public void getDailyTotalSaleAmountStat() {
 		
 		List<Statistics> list = statisticsDAO.getDailyTotalSaleAmountStat();
 		
+		Assert.assertNotNull(list);
+		Assert.assertEquals(4, list.size());
+	}
+	
+	//@Test
+	public void getMonthlyTotalSaleAmountStat() {
+		
+		List<Statistics> list = statisticsDAO.getMonthlyTotalSaleAmountStat();
+
+		Assert.assertNotNull(list);
+		
+	}
+	
+	@Test
+	public void getQuarterTotalSaleAmountStat() {
+		
+		List<Statistics> list = statisticsDAO.getQuarterTotalSaleAmountStat();
+		
+		Assert.assertNotNull(list);
 		Assert.assertEquals(4, list.size());
 	}
 }

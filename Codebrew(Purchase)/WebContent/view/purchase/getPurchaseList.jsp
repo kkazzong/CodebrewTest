@@ -135,7 +135,7 @@
 								<br>
 								<div class="row">
 									<div class="col-xs-4 col-md-6"><strong>결제번호</strong></div>
-									<div class="col-xs-8 col-md-6">${purchase.tid}</div>
+									<div class="col-xs-8 col-md-6">${purchase.paymentNo}</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-4 col-md-6"><strong>구매수량</strong></div>
@@ -179,7 +179,7 @@
 		<c:set var="i" value="${i+1}"></c:set>
 		<h2>${i}</h2>
 		<hr>
-		${purchase.tid}
+		${purchase.paymentNo}
 		<hr>
 		${purchase.itemName} 
 		<hr>

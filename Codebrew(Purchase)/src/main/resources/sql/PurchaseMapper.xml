@@ -9,9 +9,10 @@
 	<resultMap type="purchase" id="selectPurchaseMap">
 		<result property="purchaseNo" column="purchase_no" jdbcType="NUMERIC"/>
 		<result property="tid" column="tid" jdbcType="VARCHAR"/>
+		<result property="paymentNo" column="payment_no" jdbcType="VARCHAR"/>
 		<result property="purchaseMethodType" column="purchase_method_type" jdbcType="VARCHAR"/>
 		<result property="itemName" column="item_name" jdbcType="VARCHAR"/>
-		<result property="purchaseDate" column="purchase_date" jdbcType="DATE"/>
+		<result property="purchaseDate" column="purchase_date" jdbcType="TIMESTAMP"/>
 		<result property="purchasePrice" column="purchase_price" jdbcType="NUMERIC"/>
 		<result property="purchaseCount" column="purchase_count" jdbcType="VARCHAR"/>
 		<result property="tranCode" column="tran_code" jdbcType="VARCHAR"/>
@@ -48,7 +49,7 @@
 		(purchase_no,
 		user_id,
 		ticket_no,
-		tid,
+		payment_no,
 		purchase_method_type,
 		item_name,
 		purchase_date,
@@ -60,10 +61,10 @@
 		VALUES (seq_purchase_purchase_no.nextval,
 						#{user.userId:VARCHAR},
 						#{ticket.ticketNo:NUMERIC},
-						#{tid:VARCHAR},
+						#{paymentNo:VARCHAR},
 						#{purchaseMethodType:VARCHAR},
 						#{itemName:VARCHAR},
-						#{purchaseDate:DATE},
+						#{purchaseDate:TIMESTAMP},
 						#{purchasePrice:NUMERIC},
 						#{purchaseCount:NUMERIC},
 						#{tranCode:VARCHAR},
@@ -83,10 +84,10 @@
 		p.party_no AS party_no,
 		p.party_name AS party_name,
 		p.party_image AS party_image,
-		pc.tid AS tid,
+		pc.payment_no AS payment_no,
 		pc.purchase_method_type AS purchase_method_type,
 		pc.item_name AS item_name,
-		pc.purchase_date AS purchase_date,
+		TO_CHAR(pc.purchase_date, 'yyyy-mm-dd hh:mm:ss') AS purchase_date,
 		pc.purchase_price AS purchase_price,
 		pc.purchase_count AS purchase_count,
 		pc.tran_code AS tran_code,
@@ -109,7 +110,7 @@
 		,t.ticket_no AS ticket_no
 		,f.festival_name AS festival_name
 		,f.addr AS addr, f.start_date AS start_date, f.end_date AS end_date, f.festival_image AS festival_image
-		,pc.purchase_no AS purchase_no, pc.tid AS tid, pc.purchase_count AS purchase_count
+		,pc.purchase_no AS purchase_no, pc.payment_no AS payment_no, pc.purchase_count AS purchase_count
 		,pc.purchase_price AS purchase_price, pc.tran_code AS tran_code
 		,pc.item_name AS item_name
 		FROM users u, festival f, ticket t, purchase pc
@@ -126,7 +127,7 @@
 		,t.ticket_no AS ticket_no
 		,p.party_name AS party_name, p.party_date AS party_date
 		,p.party_place AS party_place, p.party_image AS party_image
-		,pc.purchase_no AS purchase_no, pc.tid AS tid, pc.purchase_count AS purchase_count
+		,pc.purchase_no AS purchase_no, pc.payment_no AS payment_no, pc.purchase_count AS purchase_count
 		,pc.purchase_price AS purchase_price, pc.tran_code AS tran_code
 		,pc.item_name AS item_name
 		FROM users u, party p, ticket t, purchase pc
